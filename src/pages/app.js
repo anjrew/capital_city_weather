@@ -100,6 +100,14 @@ class App extends React.Component {
                         <CircularProgressIndicator/>
                     </CSSTransition>
 
+                    <CSSTransition
+                        in={status === 'error'}
+                        timeout={500}
+                        classNames='fade'
+                        unmountOnExit>
+                        <h5 style={{textAlign:'center'}}>{props.message && props.message.toString()}</h5>
+                    </CSSTransition>
+
                     <div>
                         <CSSTransition
                             in={status === 'hasData'}
@@ -113,11 +121,11 @@ class App extends React.Component {
                                         padding: '20px'
                                     }}
                                 >Weather in {props.query}</h3>
-                                <Row><h4>Temp</h4>{weather && <h4>{weather.temp}&#8451;</h4>}</Row>
-                                <Row><h4>Pressure</h4>{weather && <h4>{weather.pressure} hPa</h4>}</Row>
-                                <Row><h4>Humidity</h4>{weather && <h4>{weather.humidity}%</h4>}</Row>
-                                <Row><h4>Wind speed</h4>{weather && <h4>{weather.windSpeed} mph</h4>}</Row>
-                                <Row><h4>Wind direction</h4>{weather && <h4>{weather.windDirection}</h4>}</Row>
+                                <Row padding='10px'><h4>Temp</h4>{weather && <h4>{weather.temp}&#8451;</h4>}</Row>
+                                <Row padding='10px'><h4>Pressure</h4>{weather && <h4>{weather.pressure} hPa</h4>}</Row>
+                                <Row padding='10px'><h4>Humidity</h4>{weather && <h4>{weather.humidity}%</h4>}</Row>
+                                <Row padding='10px'><h4>Wind speed</h4>{weather && <h4>{weather.windSpeed} mph</h4>}</Row>
+                                <Row padding='10px'><h4>Wind direction</h4>{weather && <h4>{weather.windDirection}</h4>}</Row>
                             </Column>
 
                         </CSSTransition>

@@ -36,7 +36,8 @@ export default function reducer(state = {}, action) {
             return {
                 ...state,
                 status: 'error',
-                message: action.payload
+                message: "The request for the weather of this city did not work :/",
+                loading: false
             };
 
         // GET CITYS

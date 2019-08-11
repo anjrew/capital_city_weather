@@ -23,7 +23,6 @@ export const action = {
                     dispatch({
                         type: "GET_CITYS_FULFILLED",
                         payload: resp.data,
-                        query: query
                     });}
                 ).catch((e) =>{
                     dispatch({
