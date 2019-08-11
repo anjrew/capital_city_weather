@@ -2,29 +2,10 @@ import axios from "../axios";
 
 export const parseCitysResp = store => next => action => {
     if (action.type === "GET_CITYS_FULFILLED") {
-    //     console.log(action.payload.data.results);
-
-    //     action.payload = action.payload.data.results.map((item) =>{
-    //         let subtitle = item.highlightedVicinity ?
-    //             item.highlightedVicinity
-    //                 .replace(new RegExp('<b>', 'g'),'')
-    //                 .replace(new RegExp('</b>', 'g'),'')
-    //                 .replace(new RegExp('<br/>', 'g'),', '): '';
-            
-    //         return ({ 
-    //             title: item.title,
-    //             subTitle: subtitle,
-    //             lat: item.position[0],
-    //             long: item.position[1]
-    //         }); });
-		// }
-		console.log('The action at this stage is', action);
-        console.log(store.getState());
+ 
         const query = store.getState().query;
         action.payload = action.payload
             .map((item) => item.capital);
-            // .filter((item) => item.startsWith(query));
-        console.log('The action at this stage is', action);
     }
     
     next(action);

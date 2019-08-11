@@ -3,10 +3,18 @@ import axios from "../axios";
 // All aJax requests will go from this file
 export const action = {
 
-    getWeather:(city) => ({
-        type: "GET_WEATHER",
-        payload: axios.get(`/get-weather/${city}`)
-    }),
+    getWeather:(city) => {
+        if(city){
+            return ({
+                type: "GET_WEATHER",
+                payload: axios.get(`/get-weather/${city}`)
+            });
+        } else {
+            return {
+                type: "NO_QUERY",
+            };
+        }
+    },
     getCitys:(query) => {
         return (dispatch) => {
 

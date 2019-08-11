@@ -44,7 +44,8 @@ class App extends React.Component {
                                         position :'absolute',
                                         left: '50%',
                                         transform: 'translate(-50%)',
-                                        width: '100%'
+                                        width: '100%',
+                                        maxWidth: '400px'
                                     }}>
                                     {citys && citys.map((city) => (
                                         <div 
@@ -56,18 +57,15 @@ class App extends React.Component {
                                             style={{
                                                 placeContent:'center',
                                                 padding: '10px'
-                                            }} 
-                                        ><h3 onClick={ (e) => { 
-                                                e.preventDefault();
-                                                e.stopPropagation();
-                                                console.log("Handleing change in Textfield");
-                                                props.dispatch(action.chooseCity(e.target.innerText));
-                                            }}>{city}</h3>
-                                            {/* <h4
-                                                style={{
-                                                    placeContent:'center', 
-                                                    padding: '10px'
-                                                }} >{city.subTitle}</h4> */}
+                                            }} >
+                                            <h3 
+                                                classNames={'option'}
+                                                onClick={ (e) => { 
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    console.log("Handleing change in title");
+                                                    props.dispatch(action.chooseCity(e.target.innerText));
+                                                }}>{city}</h3>
                                         </div>
                                     ))}
                                 </div>
@@ -85,7 +83,8 @@ class App extends React.Component {
                         <button
                             style={{ 
                                 padding: '20px',
-                                borderRadius: '20px'
+                                borderRadius: '20px',
+                                backgroundColor: 'lightgray'
                             }}
                             onClick={() => props.dispatch(action.getWeather(props.query))}
                         >Get weather</button>
@@ -127,7 +126,8 @@ class App extends React.Component {
                             position :'absolute',
                             left: '50%',
                             transform: 'translate(-50%)',
-                            width: '100%'
+                            width: '100%',
+                            maxWidth: '400px'
                         }}>
                             <CSSTransition
                                 in={status === 'hasData'}

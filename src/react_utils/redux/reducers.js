@@ -118,6 +118,15 @@ export default function reducer(state = {}, action) {
                 query: '',
                 showResults: false
             };
+			
+        case "NO_QUERY":
+            return {
+                ...state,
+                status: 'error',
+                message: "Please type the name of the city.",
+                loading: false
+            };
+			
         default:
             return state;
     }
