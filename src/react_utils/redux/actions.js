@@ -42,35 +42,6 @@ export const action = {
         };
     },
 	
-			
-    // getWeather:(lat, long) => ({
-    //     type: "GET_WEATHER",
-    //     payload: axios.get(`api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}`)
-    // }),
-	
-  
-	
-    // getCitys:(query) => ({
-    //     type: "GET_CITYS",
-    //     payload: axios.get(`https://places.cit.api.here.com/places/v1/autosuggest
-    // 	?at=40.74917,-73.98529
-    // 	&q=${query}
-    // 	&app_id=DVTC1tCnM4i8HSouJGl4
-    // 	&app_code=2xb1dv9OIWwt4baeLA0u4A
-    // 	`),
-    //     query: query
-    // }),
-	
-    // getCitys:(query) => ({
-    //     type: "GET_CITYS",
-    //     payload: axios.get(
-    //         `https://andruxnet-world-cities-v1.p.rapidapi.com/?query=${query}&searchby=`,
-    //         {headers:{
-    //             "X-RapidAPI-Host":"value",
-    //             "X-RapidAPI-Key": "670c81d697mshcaabeadccd712c9p11f7dfjsn0e1f9a7e2bac"
-    //         }}),
-    //     query: query
-    // }),
     getCurrentLocation:() => ({
         type: "GET_CURRENT_LOCATION",
     }),
