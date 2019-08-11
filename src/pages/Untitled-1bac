@@ -9,8 +9,6 @@ import Row from '../components/layout/row';
 import { CSSTransition } from 'react-transition-group';
 import CircularProgressIndicator from '../components/progress_indicators/circular_progress_indicator.js';
 import TextField from '../components/inputs/textfield';
-import Container from '../components/boxes/container';
-
 
 class App extends React.Component {
 
@@ -29,7 +27,7 @@ class App extends React.Component {
 					
                     <div id="search" style={{ padding : '20px' }}>
                         <TextField
-                            value={props.query || ""}  
+                            value={props.query}  
                             // onBlur={() => { this.props.dispatch(action.hideResults()); } }
                             onFocus={() => { props.dispatch(action.showResults()); }}
                             handleChange={(e) => { props.dispatch(action.getCitys(e.target.value)); }}/>
@@ -92,43 +90,59 @@ class App extends React.Component {
                         >Get weather</button>
                     </CSSTransition>
 
-                    <CSSTransition
-                        in={props.loading}
-                        timeout={500}
-                        classNames='fade'
-                        unmountOnExit>
-                        <CircularProgressIndicator/>
-                    </CSSTransition>
 
-                    <div>
-                        <CSSTransition
-                            in={status === 'hasData'}
-                            timeout={500}
-                            classNames='fade'
-                            unmountOnExit>
-                            <Column>
-                                <h3 
-                                    style={{ 
-                                        textAlign: 'center',
-                                        padding: '20px'
-                                    }}
-                                >Weather in {props.query}</h3>
-                                <Row><h4>Temp</h4>{weather && <h4>{weather.temp}</h4>}</Row>
-                                <Row><h4>Pressure</h4>{weather && <h4>{weather.pressure}</h4>}</Row>
-                                <Row><h4>Humidity</h4>{weather && <h4>{weather.humidity}</h4>}</Row>
-                                <Row><h4>Wind speed</h4>{weather && <h4>{weather.windSpeed}</h4>}</Row>
-                                <Row><h4>Wind direction</h4>{weather && <h4>{weather.windDirection}</h4>}</Row>
-                            </Column>
 
-                        </CSSTransition>
+                    <div
+                        style={{
+                            position :'relative',
+                            width: '100%',
+                            padding: '30px'
+                        }}>
+                        <div
+                            style={{
+                                position :'absolute',
+                                left: '50%',
+                                transform: 'translate(-50%)',
+                                width: 'calc(100% - 80px)'
+                            }}>
+                            <CSSTransition
+                                in={status === 'hasData'}
+                                timeout={500}
+                                classNames='fade'
+                                unmountOnExit>
+                                <Column>
+                                    <h3 
+                                        style={{ 
+                                            textAlign: 'center',
+                                            padding: '20px'
+                                        }}
+                                    >Weather in {props.query}</h3>
+                                    <Row><h4>Temp</h4>{weather && <h4>{weather.temp}</h4>}</Row>
+                                    <Row><h4>Pressure</h4>{weather && <h4>{weather.pressure}</h4>}</Row>
+                                    <Row><h4>Humidity</h4>{weather && <h4>{weather.humidity}</h4>}</Row>
+                                    <Row><h4>Wind speed</h4>{weather && <h4>{weather.windSpeed}</h4>}</Row>
+                                    <Row><h4>Wind direction</h4>{weather && <h4>{weather.windDirection}</h4>}</Row>
+                                </Column>
 
-                        <CSSTransition
-                            in={status === 'loading'}
-                            timeout={500}
-                            className='scale'
-                            unmountOnExit>
-                            <CircularProgressIndicator/>
-                        </CSSTransition>
+                            </CSSTransition>
+                        </div>
+
+
+                        <div
+                            style={{
+                                position :'absolute',
+                                left: '50%',
+                                transform: 'translate(-50%)',
+                            }}>
+                            <CSSTransition
+                                in={props.loading}
+                                timeout={500}
+                                classNames='fade'
+                                unmountOnExit>
+                                <CircularProgressIndicator/>
+                            </CSSTransition>
+                        </div>
+
                     </div>
 
                 </Column>

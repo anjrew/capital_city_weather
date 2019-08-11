@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class SafeArea extends React.Component{
+export default class SafeArea extends React.Component{
 
     constructor (props) {
         super(props);

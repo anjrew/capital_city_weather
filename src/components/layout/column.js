@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class Column extends React.Component{
+export default class Column extends React.Component{
     
     render(){
         return (

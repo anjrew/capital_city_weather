@@ -1,115 +1,106 @@
-import { projects } from '../../data/project-page-data';
-	
+import axios from "../axios";
 
 // All aJax requests will go from this file
-export const Action = {
-    showProject: function(projectName){
-       
-        projectName = projectName.trim();
-        var data;
-		
-        for (let index = 0; index < projects.length; index++) {
-            const project = projects[index];
-            if (project.title == projectName) {
-                data = project;
+export const action = {
+
+    getWeather:(city) => ({
+        type: "GET_WEATHER",
+        payload: axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1e068bbdea01db25f086a99d94ef7bbc&units=metric`)
+    }),
+    getCitys:(query) => {
+        return (dispatch) => {
+
+            if(!query){
+                dispatch({
+                    type: "EMPTY_QUERY",
+                });
+            } else {
+                dispatch({
+                    type: "UPDATE_QUERY",
+                    payload: query
+                });
+                axios.get(`https://restcountries.eu/rest/v2/capital/${query}`).then((resp) =>{
+                    dispatch({
+                        type: "GET_CITYS_FULFILLED",
+                        payload: resp.data,
+                        query: query
+                    });}
+                ).catch((e) =>{
+                    dispatch({
+                        type: "GET_CITYS_REJECTED",
+                        payload: e,
+                    });
+                });
             }
-        }
-        return {
-            type: "SHOW_PROJECT",
-            project: data,
-            direction: "BOTTOM"
         };
     },
-    openProject(project){
-        return {
-            type: "SHOW_PROJECT",
-            project: project,
-            direction: "BOTTOM"
-        };
+	
+			
+    // getWeather:(lat, long) => ({
+    //     type: "GET_WEATHER",
+    //     payload: axios.get(`api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}`)
+    // }),
+	
+  
+	
+    // getCitys:(query) => ({
+    //     type: "GET_CITYS",
+    //     payload: axios.get(`https://places.cit.api.here.com/places/v1/autosuggest
+    // 	?at=40.74917,-73.98529
+    // 	&q=${query}
+    // 	&app_id=DVTC1tCnM4i8HSouJGl4
+    // 	&app_code=2xb1dv9OIWwt4baeLA0u4A
+    // 	`),
+    //     query: query
+    // }),
+	
+    // getCitys:(query) => ({
+    //     type: "GET_CITYS",
+    //     payload: axios.get(
+    //         `https://andruxnet-world-cities-v1.p.rapidapi.com/?query=${query}&searchby=`,
+    //         {headers:{
+    //             "X-RapidAPI-Host":"value",
+    //             "X-RapidAPI-Key": "670c81d697mshcaabeadccd712c9p11f7dfjsn0e1f9a7e2bac"
+    //         }}),
+    //     query: query
+    // }),
+    getCurrentLocation:() => ({
+        type: "GET_CURRENT_LOCATION",
+    }),
+    hideResults:() => ({
+        type: "HIDE_RESULTS"
+    }),
+    showResults:() => ({
+        type: "SHOW_RESULTS"
+    }),
+    chooseCity:(city) => ({
+        type: "CHOOSE_CITY",
+        payload: city
+    }),
+    getClosestCity:(query) => {
+        return async dispatch => {
+            dispatch(action.loading());
+            console.log(query);
+            let resp;
+            try {
+                resp = await axios.get(`https://restcountries.eu/rest/v2/capital/${query}`);
+                console.log(resp);
+                let citys = resp.data.map((item) => item.capital);
+                return {
+                    type: "GET__CLOSEST_CITY",
+                    payload: citys
+                };
+            } catch (e) {
+                return {
+                    type: "SHOW_ERROR",
+                    payload: e
+                };
+            }
+        };  
     },
-    nextImage(image){
-        var nextImage = checkPageDataVsImage(projects, image, 1);
+    loading: () =>{
         return {
-            type: "PREPARE_NEXT_IMAGE",
-            image: nextImage,
-            direction: "shiftRight"
-        };
-    },
-    previousImage(image){
-        var previousImage = checkPageDataVsImage(projects, image, -1);
-        return {
-            type: "PREPARE_NEXT_IMAGE",
-            image: previousImage,
-            direction: "shiftLeft"
-        };
-    },
-    showImage: function(image){
-        if( typeof image !== 'object'){ throw new Error('Image should be an object'); }
-        return {
-            type: "SHOW_IMAGE",
-            image: image
-        };
-    },
-    dismissImage:function(){
-        return {
-            type: "DISSMISS_IMAGE",
-        };
-    },
-    dismissAll(){
-        this.dismissImage();
-        return {
-            type: "DISSMISS_ALL",
-        };
-    },
-    calibrateAppSize(widowWidth){
-        return {
-            type: "SET_APP_SIZE",
-            mobileApp: widowWidth < 750,
-            smallScreen: widowWidth < 1020
-        };
-    },
-    renderNext(){
-        return {
-            type: "RENDER_NEXT_IMAGE"
-        };
-    },
-    addTracks(tracks){
-        return {
-            type: "ADD_TRACKS",
-            tracks: tracks
-        };
-    },
-    showVideo(video){
-        return {
-            type: "SHOW_VIDEO",
-            video: video
-        };
-    },
-    dismissVideo(){
-        return {
-            type: "DISSMISS_VIDEO"
+            type: "LOADING"
         };
     }
 };
-
-export const ActionIds = {
-	
-};
-
-function checkImageData(element ,imageData, ) {
-    return imageData.name == element.name;
-}
-
-function checkPageDataVsImage(pageData, image, returnDifference){
-    for (let index = 0; index < pageData.length; index++) {
-        const project = pageData[index];
-        if (image){
-            if (image.project == project.title){
-                var currentIndex = project.screenShots.findIndex((element) => checkImageData(element, image));
-                if (currentIndex >= 0) {
-                    return project.screenShots[currentIndex + returnDifference];
-                }
-            }
-        }
-    }  
-}

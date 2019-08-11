@@ -7,12 +7,20 @@ import App from './pages/app';
 // REDUX
 import reducer from './react_utils/redux/reducers';
 import { createStore, applyMiddleware } from 'redux';
-import reduxPromise from 'redux-promise';
+import promise from 'redux-promise-middleware';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(reduxPromise)));
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+import { parseCitysResp }from './react_utils/redux/middleware';
 
-// initSocket(store);
+const middleWare = applyMiddleware(thunk, promise, parseCitysResp, logger);
+const initialState = {
+    status: '',
+    query:''
+};
+
+const store = createStore(reducer, initialState, composeWithDevTools(middleWare));
 
 let elem = <Provider store={store}>
     <App />

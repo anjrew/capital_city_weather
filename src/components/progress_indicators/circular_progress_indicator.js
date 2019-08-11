@@ -1,12 +1,12 @@
 import React from 'react';
 
-export class CircularProgressIndicator extends React.Component{
+export default class CircularProgressIndicator extends React.Component{
 
     render(){
         return (
             <div 
                 className="lds-ring"  
-                src='/assets/images/nerd-logo.png' 
+                // src='/assets/images/nerd-logo.png' 
                 style={{ 
                     margin : this.props.margin || '20px'
                 }}

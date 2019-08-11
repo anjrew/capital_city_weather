@@ -1,90 +1,126 @@
-/* eslint-disable indent */
-/* eslint-disable no-mixed-spaces-and-tabs */
 export default function reducer(state = {}, action) {
-    // console.log('IN reducer with action ', action, ' and state ', state);
+    console.log('IN reducer with action ', action, ' and state ', state);
 
     switch (action.type) {
 
-        case "SHOW_PROJECT":
-            return { 
-                ...state, 
-                showProject: action.project,
-                currentImage: action.image 
-			};
-			
-        case "DISSMISS_ALL":
-			return { ...state, showProject: null };
-			
-        case "SET_APP_SIZE":
-            return { 
-                ...state, 
-                mobileApp: action.mobileApp,
-                smallScreen: action.smallScreen
-			 };
-
-        case "SHOW_IMAGE":
-            return { 
-                ...state, 
-                currentImage: action.image,
-                showImage: true
-			};
-			
-        case "DISSMISS_IMAGE":
-            return { 
-                ...state, 
-                showImage: false,
-                currentImage: null
+        // GET WEATHER
+        case "GET_WEATHER_PENDING":
+            return {
+                ...state,
+                hasCity: 'loading',
+                message: null,
+                loading:true
             };
 
-        case "PREPARE_NEXT_IMAGE":
-            if (action.image == undefined){
-                return {
-                    ...state,
-                    showImage: false,
-                    nextImage: null,
-                    currentImage: null,
-                    nextDirection: null
-                };
-            } else {
-                return {
-                    ...state,
-                    showImage: false,
-                    nextImage: action.image,
-                    nextDirection: action.direction,
-                    direction: action.direction
-                };
-            }
-            
-        case "RENDER_NEXT_IMAGE":
+        case "GET_WEATHER_FULFILLED":{
+            const data = action.payload.data;
             return {
                 ...state,
-                currentImage: state.nextImage,
-                showImage: true,
-                nextImage: null,
-                direction: state.nextDirection,
-                nextDirection: null
-			};
-			
-        case "ADD_TRACKS":
+                status: 'hasData',
+                weather: { 
+                    description: data.weather[0].description,
+                    temp: data.main.temp,
+                    tempMin: data.main.temp_min,
+                    tempMax: data.main.temp_max,
+                    pressure: data.main.pressure,
+                    humidity: data.main.humidity,
+                    windSpeed: data.wind.speed,
+                    windDirection: data.wind.deg
+                },
+                loading: false
+            };
+
+        }
+
+        case "GET_WEATHER_REJECTED":
             return {
                 ...state,
-                tracks: action.tracks
-			};
+                status: 'error',
+                message: action.payload
+            };
 
-		case "SHOW_VIDEO":
-			return {
-				...state,
-				video: action.video
-			};
+        // GET CITYS
+        case "GET_CITYS_PENDING":
+            return {
+                ...state,
+                citys: action.payload,
+            };
 
-		case "DISSMISS_VIDEO":
-			return {
-				...state,
-				video: null
-			};
+        case "GET_CITYS_FULFILLED":
+            return {
+                ...state,
+                citys: action.payload,
+                query: action.query,
+                showResults: true
+            };
+
+        case "GET_CITYS_REJECTED":
+            return {
+                ...state,
+                citys: null,
+                message: action.payload,
+                showResults: false
+            };
 			
+        case "GET_CURRENT_LOCATION_PENDING":
+            return {
+                ...state,
+                currentLocation: "PENDING",
+            };
+	
+        case "GET_CURRENT_LOCATION_FULFILLED":
+            return {
+                ...state,
+                citys: action.payload,
+            };
+	
+        case "GET_CURRENT_LOCATION_REJECTED":
+            return {
+                ...state,
+                status: 'error',
+                message: action.payload
+            };
+
+        case "SHOW_RESULTS":
+            return {
+                ...state,
+                showResults: true,
+                status: "noData"
+            };
+
+        case "HIDE_RESULTS":
+            return {
+                ...state,
+                showResults: false,
+            };
+			
+        case "LOADING":
+            return {
+                ...state,
+                status: 'loading',
+            };
+			
+        case "CHOOSE_CITY":
+            return {
+                ...state,
+                query: action.payload,
+                showResults: false
+            };
+
+        case "UPDATE_QUERY":
+            return {
+                ...state,
+                query: action.payload,
+                showResults: true
+            };
+        case "EMPTY_QUERY":
+            return {
+                ...state,
+                query: '',
+                showResults: false
+            };
         default:
             return state;
     }
-    
+
 }
