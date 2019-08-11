@@ -9,7 +9,6 @@ import Row from '../components/layout/row';
 import { CSSTransition } from 'react-transition-group';
 import CircularProgressIndicator from '../components/progress_indicators/circular_progress_indicator.js';
 import TextField from '../components/inputs/textfield';
-import Container from '../components/boxes/container';
 
 
 class App extends React.Component {
@@ -91,6 +90,7 @@ class App extends React.Component {
                             onClick={() => props.dispatch(action.getWeather(props.query))}
                         >Get weather</button>
                     </CSSTransition>
+					
                     <div style={{ 
                         position :'relative',
                         width: '100%'}}>
@@ -113,7 +113,6 @@ class App extends React.Component {
                             position :'absolute',
                             left: '50%',
                             transform: 'translate(-50%)',
-                            width: '100%'
                         }}>
                             <CSSTransition
                                 in={status === 'error'}

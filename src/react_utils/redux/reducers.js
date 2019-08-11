@@ -29,7 +29,6 @@ export default function reducer(state = {}, action) {
                 },
                 loading: false
             };
-
         }
 
         case "GET_WEATHER_REJECTED":
@@ -51,7 +50,6 @@ export default function reducer(state = {}, action) {
             return {
                 ...state,
                 citys: action.payload,
-                query: action.query,
                 showResults: true
             };
 

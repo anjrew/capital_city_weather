@@ -5,7 +5,7 @@ export const action = {
 
     getWeather:(city) => ({
         type: "GET_WEATHER",
-        payload: axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1e068bbdea01db25f086a99d94ef7bbc&units=metric`)
+        payload: axios.get(`/get-weather/${city}`)
     }),
     getCitys:(query) => {
         return (dispatch) => {
