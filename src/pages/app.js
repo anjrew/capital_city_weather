@@ -130,13 +130,6 @@ class App extends React.Component {
 
                         </CSSTransition>
 
-                        <CSSTransition
-                            in={status === 'loading'}
-                            timeout={500}
-                            className='scale'
-                            unmountOnExit>
-                            <CircularProgressIndicator/>
-                        </CSSTransition>
                     </div>
 
                 </Column>
