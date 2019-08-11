@@ -113,10 +113,10 @@ class App extends React.Component {
                                         padding: '20px'
                                     }}
                                 >Weather in {props.query}</h3>
-                                <Row><h4>Temp</h4>{weather && <h4>{weather.temp}</h4>}</Row>
-                                <Row><h4>Pressure</h4>{weather && <h4>{weather.pressure}</h4>}</Row>
-                                <Row><h4>Humidity</h4>{weather && <h4>{weather.humidity}</h4>}</Row>
-                                <Row><h4>Wind speed</h4>{weather && <h4>{weather.windSpeed}</h4>}</Row>
+                                <Row><h4>Temp</h4>{weather && <h4>{weather.temp}&#8451;</h4>}</Row>
+                                <Row><h4>Pressure</h4>{weather && <h4>{weather.pressure} hPa</h4>}</Row>
+                                <Row><h4>Humidity</h4>{weather && <h4>{weather.humidity}%</h4>}</Row>
+                                <Row><h4>Wind speed</h4>{weather && <h4>{weather.windSpeed} mph</h4>}</Row>
                                 <Row><h4>Wind direction</h4>{weather && <h4>{weather.windDirection}</h4>}</Row>
                             </Column>
 
