@@ -23,7 +23,10 @@ class App extends React.Component {
         return (
             <SafeArea>
                 <Column>
-                    <h1 style={{ textAlign: 'center'}}>Capital City weather</h1>
+                    <h1 style={{ 
+                        textAlign: 'center',
+                        margin: "0px 0px 20px 0px",
+                    }}>Capital City weather</h1>
                     <p style={{ textAlign: 'center'}}>Check the weather in a capital city.</p>
 					
                     <div id="search" style={{ padding : '20px' }}>
