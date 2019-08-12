@@ -26,7 +26,7 @@ class App extends React.Component {
                     <h1 style={{ 
                         textAlign: 'center',
                         margin: "0px 0px 20px 0px",
-                    }}>Capital City weather</h1>
+                    }}>Capital City Weather</h1>
                     <p style={{ textAlign: 'center'}}>Check the weather in a capital city.</p>
 					
                     <div id="search" style={{ padding : '20px' }}>
@@ -62,7 +62,7 @@ class App extends React.Component {
                                                 padding: '10px'
                                             }} >
                                             <h3 
-                                                classNames={'option'}
+                                                className={'option'}
                                                 onClick={ (e) => { 
                                                     e.preventDefault();
                                                     e.stopPropagation();

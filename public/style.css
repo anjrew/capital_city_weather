@@ -72,6 +72,13 @@ button:active{
     transform: translateY(-3px)
 }
 
+.option{
+	transform: scale(1.0)
+}
+.option:hover{
+	transform: scale(1.03)
+}
+
 h1{
 	font-size: 150px;
 	background-color: white;
