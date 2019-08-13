@@ -1,6 +1,5 @@
 // IMPORTS
 const express = require('express');
-const chalk = require('chalk');
 const app = express();
 const compression = require('compression');
 const bodyParser = require('body-parser');
@@ -9,9 +8,6 @@ const print = require('./utils/print');
 const server = require('http').Server(app);
 const http = require('http');
 const weatherApiKey = process.env.NODE_ENV != 'production' ? require('./secrets.json').weatherApiKey : process.env.WEATHER_API_KEY;
-
-console.log("THE ENVIROMENT VARS ARE", process.env);
-
 
 global.appRoot = path.resolve(__dirname);
 
@@ -66,7 +62,6 @@ app.get('*', function(req, res) {
 });
 
 function getWeather(city ,callback){
-	console.log(chalk.bgRedBright('The weather API key is'), weatherApiKey);
     const req = http.request({
         host: `api.openweathermap.org`,
         path:  encodeURI(`/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=metric`),
