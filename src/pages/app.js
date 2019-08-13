@@ -48,7 +48,7 @@ class App extends React.Component {
                                         left: '50%',
                                         transform: 'translate(-50%)',
                                         width: '100%',
-                                        maxWidth: '400px'
+                                        maxWidth: '300px'
                                     }}>
                                     {citys && citys.map((city) => (
                                         <div 
@@ -59,7 +59,9 @@ class App extends React.Component {
                                             key={city + Math.random().toString()} 
                                             style={{
                                                 placeContent:'center',
-                                                padding: '10px'
+                                                padding: '10px',
+                                                maxWidth: '300px'
+
                                             }} >
                                             <h3 
                                                 className={'option'}
@@ -130,7 +132,7 @@ class App extends React.Component {
                             left: '50%',
                             transform: 'translate(-50%)',
                             width: '100%',
-                            maxWidth: '400px'
+                            maxWidth: '300px'
                         }}>
                             <CSSTransition
                                 in={status === 'hasData'}
@@ -144,6 +146,7 @@ class App extends React.Component {
                                             padding: '20px'
                                         }}
                                     >Weather in {props.query}</h3>
+                                    <Row padding='10px'><h4>Description</h4>{weather && <h4>{weather.description}</h4>}</Row>
                                     <Row padding='10px'><h4>Temp</h4>{weather && <h4>{weather.temp}&#8451;</h4>}</Row>
                                     <Row padding='10px'><h4>Pressure</h4>{weather && <h4>{weather.pressure} hPa</h4>}</Row>
                                     <Row padding='10px'><h4>Humidity</h4>{weather && <h4>{weather.humidity}%</h4>}</Row>

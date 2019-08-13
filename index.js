@@ -7,7 +7,9 @@ const path = require('path');
 const print = require('./utils/print');
 const server = require('http').Server(app);
 const http = require('http');
-const weatherApiKey = process.env.NODE_ENV != 'production' ? require('./secrets.json').weatherApiKey : process.env.weatherApiKey;
+const weatherApiKey = process.env.NODE_ENV != 'production' ? require('./secrets.json').weatherApiKey : process.env.WEATHER_API_KEY;
+
+console.log("THE ENVIROMENT VARS ARE", process.env);
 
 global.appRoot = path.resolve(__dirname);
 
@@ -60,8 +62,6 @@ app.get('/get-weather/:city', function(req, res) {
 app.get('*', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
-
-
 
 function getWeather(city ,callback){
 
