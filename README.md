@@ -1,5 +1,6 @@
 **How to get this project up and running**
-To see this site working we have two options.
+
+To get this site working we have two options.
 * Go to the site that is live on [Heroku](https://capitalcityweather.herokuapp.com/) 
 * Run the site on your own machine.
 	1. Clone or download this project repository.
