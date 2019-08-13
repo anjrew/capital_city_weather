@@ -1,4 +1,4 @@
-**How to get this project up and running**
+***How to get this project up and running***
 
 To get this site working we have two options.
 * Go to the site that is live on [Heroku](https://capitalcityweather.herokuapp.com/) 
