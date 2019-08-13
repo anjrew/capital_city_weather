@@ -7,9 +7,9 @@ const path = require('path');
 const print = require('./utils/print');
 const server = require('http').Server(app);
 const http = require('http');
+const weatherApiKey = process.env.NODE_ENV != 'production' ? require('./secrets.json').weatherApiKey : process.env.weatherApiKey;
 
 global.appRoot = path.resolve(__dirname);
-
 
 // Very important to get the POST reests of forms
 app.use(bodyParser.json()); // to support JSON-encoded bodies
@@ -67,7 +67,7 @@ function getWeather(city ,callback){
 
     const req = http.request({
         host: `api.openweathermap.org`,
-        path:  encodeURI(`/data/2.5/weather?q=${city}&appid=1e068bbdea01db25f086a99d94ef7bbc&units=metric`),
+        path:  encodeURI(`/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=metric`),
         method: 'GET',
         headers: {
             'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
